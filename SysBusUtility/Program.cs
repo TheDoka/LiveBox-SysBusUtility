@@ -23,13 +23,6 @@ namespace SysBusUtility
                 if (!string.IsNullOrEmpty(Admin.XSah))
                 {
 
-                    LiveBox myLiveBox = new LiveBox("192.168.1.1", Admin);
-
-                    // --renew
-                    if (args[0].Equals("--renew")) { myLiveBox.renewIP(); }
-                    // --status
-                    if (args[0].Equals("--status")) { Console.WriteLine(myLiveBox.getWANStatus().print()); }
-
                     // Display login information
                     if (args.Length > 1 && args[1].Equals("-v"))
                     {
@@ -37,6 +30,14 @@ namespace SysBusUtility
                                           "[{0}] Got SessionID:   {2}", time(), Admin.XSah, Admin.SessionID);
 
                     }
+
+                    LiveBox myLiveBox = new LiveBox("192.168.1.1", Admin);
+
+                    // --renew
+                    if (args[0].Equals("--renew")) { myLiveBox.renewIP(); }
+                    // --status
+                    if (args[0].Equals("--status")) { Console.WriteLine(myLiveBox.getWANStatus().print()); }
+
 
                 } else {
                     Console.WriteLine("[{0}] Couldn't login to the livebox", time());
