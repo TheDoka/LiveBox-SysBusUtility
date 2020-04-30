@@ -18,7 +18,7 @@ namespace SysBusUtility
             if (args.Length >= 1)
             {
 
-                Credentials Admin = new Credentials("admin", "k5bnm5nc");
+                Credentials Admin = new Credentials("192.168.1.1", "admin", "k5bnm5nc");
 
                 if (!string.IsNullOrEmpty(Admin.XSah))
                 {
@@ -194,19 +194,21 @@ namespace SysBusUtility
         public string SessionID;
         private string username;
         private string password;
+        private string ip;
 
-        public Credentials(string username, string password)
+        public Credentials(string ip, string username, string password)
         {
 
             this.username = username;
             this.password = password;
+            this.ip = ip;
             Auth();
 
         }
 
         private void Auth()
         {
-            Uri liveBoxIP = new Uri("http://192.168.1.1/ws");
+            Uri liveBoxIP = new Uri("http://" + ip + "/ws");
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(liveBoxIP);
 
 
@@ -285,9 +287,6 @@ namespace SysBusUtility
     }
 
     }
-
-
-
 
 
 }
