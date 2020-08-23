@@ -83,12 +83,7 @@ namespace SysBusUtility
             httpWebRequest.ContentType = "application/x-sah-ws-4-call+json; charset=UTF-8";
             httpWebRequest.Headers.Add("Authorization: X-Sah " + Credentials.XSah);
             httpWebRequest.Headers.Add("X-Context: " + Credentials.XSah);
-
-            CookieContainer cookies = new CookieContainer();
-                cookies.Add(liveBox, new Cookie("3d857f51/sessid", Credentials.SessionID));
-                cookies.Add(liveBox, new Cookie("sah/contextId", Credentials.XSah));
-
-            httpWebRequest.CookieContainer = cookies;
+            httpWebRequest.CookieContainer = Credentials.session;
                   
 
             return httpWebRequest;
@@ -191,9 +186,12 @@ namespace SysBusUtility
 
         public string XSah;
         public string SessionID;
+        public CookieContainer session;
+
         private string username;
         private string password;
         private string ip;
+        
 
         public Credentials(string ip, string username, string password)
         {
@@ -239,9 +237,10 @@ namespace SysBusUtility
 
                 this.XSah = JObject.Parse(result)["data"]["contextID"].ToString();
                 this.SessionID = cookies.GetCookies(liveBoxIP)[0].Value;
+                this.session = cookies;
 
             }
-
+            
         }
 
     }
@@ -281,7 +280,7 @@ namespace SysBusUtility
                    "\nRemoteGateway: " +         this.data.RemoteGateway+
                    "\nDNSServers: " +            this.data.DNSServers+
                    "\nIPv6Address: " +           this.data.IPv6Address+
-                   "IPv6DelegatedPrefix: " +    this.data.IPv6DelegatedPrefix;
+                   "IPv6DelegatedPrefix: " +     this.data.IPv6DelegatedPrefix;
 
     }
 

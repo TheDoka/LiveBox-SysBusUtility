@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SysBusUtility": {
+      "commandName": "Project",
+      "commandLineArgs": "--renew -v"
+    }
+  }
+}
