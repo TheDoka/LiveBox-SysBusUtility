@@ -9,4 +9,6 @@ It actually don't do much, but it's a solid base.
 
 * -v      : display login information
 
+* --status : display LiveBox status
+
 ![GitHub](use.png)
